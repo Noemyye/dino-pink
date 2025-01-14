@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DinoRun2_0: -1558100795393530445
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
