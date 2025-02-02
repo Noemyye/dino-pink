@@ -15,7 +15,7 @@ Dino-Pink est un jeu d'arcade 2D basé sur le célèbre jeu Chrome Dino. Le joue
 - **Contrôle** : Une seule touche pour sauter (par défaut : la barre d'espace).
 - **Obstacles** : 
   - Cactus (hauteur variable).
-  - Ptérosaures (à différentes altitudes).
+  - Ptérosaures.
 - **Score** : Augmente avec le temps. Plus tu cours, plus ton score grimpe !
 - **Game Over** : Le jeu se termine si le dinosaure entre en collision avec un obstacle.
 
@@ -24,9 +24,8 @@ Dino-Pink est un jeu d'arcade 2D basé sur le célèbre jeu Chrome Dino. Le joue
 ## 📂 Structure du projet
 
 ### **1. Scènes**
-- **MainMenu** : Écran principal avec le bouton "Start Game".
-- **GameScene** : Scène principale du jeu.
-- **GameOverScene** : Affiche le score final avec un bouton pour recommencer.
+- **Menu** : Écran principal avec le bouton "Play".
+- **SampleScene** : Scène principale du jeu
 
 ### **2. Assets**
 - **Sprites** :
@@ -38,35 +37,14 @@ Dino-Pink est un jeu d'arcade 2D basé sur le célèbre jeu Chrome Dino. Le joue
   - Boutons personnalisés pour le menu.
 
 - **Scripts** :
-  - `GameManager.cs` : Gestion globale (score, transitions de scènes).
+  - `GameManager.cs` : Gestion globale (score, transitions de scènes, gameover, retry...).
   - `Player.cs` : Contrôle du dinosaure (mouvement, saut).
-  - `ObstacleSpawner.cs` : Génération aléatoire des obstacles.
-  - `ScrollingBackground.cs` : Défilement infini de l'arrière-plan.
+  - `Obstacle.cs` : Vitesse, défilement et destruction des obstacles.
+  - `AnimatedSprite.cs` : Animation du joueur, des obstacles et du sol.
+  - `Spawner.cs` : Génération aléatoire des obstacles.
+  - `Ground.cs` : Boucle infini du défilement du sol.
+  - `MainMenu.cs` : Changement de scène, intéraction avec les boutons du menu.
 
----
-
-## 📜 Scripts principaux
-
-### **1. GameManager.cs**
-Gère les règles principales :
-- Singleton pour un accès global.
-- Variables globales (score, état du jeu).
-- Méthodes pour :
-  - Ajouter des points.
-  - Gérer le Game Over.
-  - Charger/recharger les scènes.
-
-### **2. PlayerController.cs**
-Contrôle le mouvement et les animations du dinosaure :
-- Gestion du saut via Rigidbody2D.
-- Détection des collisions avec les obstacles.
-
-### **3. ObstacleSpawner.cs**
-- Génère des obstacles à intervalles réguliers.
-- Ajuste la difficulté avec le temps (plus d’obstacles et vitesse accrue).
-
-### **4. ScrollingBackground.cs**
-Crée l’effet de défilement infini de l’arrière-plan et du sol.
 
 ---
 
@@ -104,7 +82,7 @@ Crée l’effet de défilement infini de l’arrière-plan et du sol.
 2. Appuyer sur "Start" pour commencer.
 3. Appuyer sur la barre d'espace pour sauter par-dessus les obstacles.
 4. Jouer jusqu'à ce que vous heurtiez un obstacle.
-5. Relancer une partie depuis l'écran Game Over.
+5. Relancer une partie depuis l'écran.
 
 ---
 
@@ -112,3 +90,6 @@ Crée l’effet de défilement infini de l’arrière-plan et du sol.
 - **Développeur** : Maxime Isidore, Noémie Dublanc.
 - **Plateforme** : Unity 2023.x.
 - **Inspiration** : Jeu Chrome Dino.
+- **Tuto** : https://www.youtube.com/watch?v=UPvW8kYqxZk par Zigurous
+
+
