@@ -1,4 +1,7 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
@@ -8,8 +11,16 @@ public class GameManager : MonoBehaviour
     public float gameSpeedIncrease = 0.1f;
     public float gameSpeed { get; private set; }
 
+    public TextMeshProUGUI gameOverText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI hiscoreText;
+    public Button retryButton;
+
     private Player player;
     private Spawner spawner;
+
+    private float score;
+    private float hiscore = 0f;
 
     private void Awake()
     {
@@ -33,7 +44,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // Utiliser FindFirstObjectByType pour récupérer un seul objet
         player = FindFirstObjectByType<Player>();
         spawner = FindFirstObjectByType<Spawner>();
 
@@ -46,9 +56,8 @@ public class GameManager : MonoBehaviour
         NewGame();
     }
 
-    private void NewGame()
+    public void NewGame()
     {
-        // Utiliser FindObjectsByType pour récupérer tous les obstacles
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
 
 
@@ -58,10 +67,14 @@ public class GameManager : MonoBehaviour
         }
 
         gameSpeed = initialGameSpeed;
+        score = 0f;
         enabled = true;
 
         player.gameObject.SetActive(true);
         spawner.gameObject.SetActive(true);
+
+        gameOverText.gameObject.SetActive(false);
+        retryButton.gameObject.SetActive(false);    
     }
 
     public void GameOver()
@@ -71,10 +84,28 @@ public class GameManager : MonoBehaviour
 
         player.gameObject.SetActive(false);
         spawner.gameObject.SetActive(false);
+
+        gameOverText.gameObject.SetActive(true);
+        retryButton.gameObject.SetActive(true);
+
+        UpdateHiscore();
     }
 
     private void Update()
     {
         gameSpeed += gameSpeedIncrease * Time.deltaTime;
+        score += gameSpeed * Time.deltaTime;
+        scoreText.text = Mathf.FloorToInt(score).ToString("D5");
+    }
+
+    private void UpdateHiscore()
+    {
+        if (score > hiscore)
+        {
+            hiscore = score;
+            PlayerPrefs.SetFloat("hiscore", hiscore);
+        }
+
+        hiscoreText.text = Mathf.FloorToInt(hiscore).ToString("D5");
     }
 }
